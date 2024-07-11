@@ -20,8 +20,10 @@ function Login() {
   const [message, setMessage] = useState('');
 
   const handleLogin = async () => {
+    const apiUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PROD_API_URL : process.env.REACT_APP_API_URL;
+
     try {
-      const response = await axios.post('http://127.0.0.1:5000/login', {
+      const response = await axios.post(`${apiUrl}/login`, {
         username,
         password,
       },

@@ -10,7 +10,7 @@ from bson.objectid import ObjectId
 
 load_dotenv()
 
-app = Flask(__name__, static_folder='../client/build', static_url_path='')
+app = Flask(__name__, static_folder='build', static_url_path='')
 # cors_origins = os.getenv('CORS_ORIGINS')
 # CORS(app, origins="*")
 cors_origins = os.getenv('CORS_ORIGINS', '').split(',')
@@ -98,5 +98,5 @@ def page_not_found(e):
 
 if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0')
-    app.run(debug=True, host='0.0.0.0', port=10000)
+        app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 

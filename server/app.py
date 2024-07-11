@@ -11,8 +11,10 @@ from bson.objectid import ObjectId
 load_dotenv()
 
 app = Flask(__name__, static_folder='../client/build', static_url_path='')
-cors_origins = os.getenv('CORS_ORIGINS')
-CORS(app, origins="*")
+# cors_origins = os.getenv('CORS_ORIGINS')
+# CORS(app, origins="*")
+cors_origins = os.getenv('CORS_ORIGINS', '').split(',')
+CORS(app, origins=cors_origins)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'  
 
@@ -95,4 +97,6 @@ def page_not_found(e):
     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    # app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+

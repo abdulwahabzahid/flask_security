@@ -21,7 +21,8 @@ function Login() {
 
   const handleLogin = async () => {
     const apiUrl = process.env.REACT_APP_API_URL;
-
+    console.log("Here is the apiURL")
+    console.log(apiUrl)
     try {
       const response = await axios.post(`${apiUrl}/login`, {
         username,

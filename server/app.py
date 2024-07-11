@@ -10,9 +10,9 @@ from bson.objectid import ObjectId
 
 load_dotenv()
 
-app = Flask(__name__, static_folder='client/build', static_url_path='')
+app = Flask(__name__, static_folder='../client/build', static_url_path='')
 cors_origins = os.getenv('CORS_ORIGINS')
-CORS(app, origins="")
+CORS(app, origins="*")
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'  
 

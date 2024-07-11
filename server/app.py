@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, abort, request, jsonify, send_from_directory, render_template
 from flask_cors import CORS
 import jwt
 from jwt import decode as jwt_decode
@@ -83,7 +83,10 @@ def user_page(**kwargs):
 def admin_page(**kwargs):
     decoded_token = kwargs.get('decoded_token')
     print(decoded_token)
-    return send_from_directory(app.static_folder, 'index.html')
+    if decoded_token and decoded_token.get('role') == 'admin':
+        return send_from_directory(app.static_folder, 'index.html')
+    else:
+        abort(404)
 
 @app.route('/superadmin', methods=['GET'])
 @verify_token

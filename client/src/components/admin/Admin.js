@@ -4,7 +4,6 @@ import { Box, Heading, Text, Button } from '@chakra-ui/react';
 const Admin = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
-    // Redirect to the login page or any other desired action after logout
     window.location.href = '/'; // Redirect to the login page
   };
 

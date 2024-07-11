@@ -20,7 +20,7 @@ function Login() {
   const [message, setMessage] = useState('');
 
   const handleLogin = async () => {
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = 'https://flask-security.onrender.com';
 
     try {
       const response = await axios.post(`${apiUrl}/login`, {

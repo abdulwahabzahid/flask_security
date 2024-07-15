@@ -7,7 +7,9 @@ import User from './components/user/User';
 import Admin from './components/admin/Admin';
 import SuperAdmin from './components/superAdmin/SuperAdmin';
 import Error from './pages/Error';
+import DocumentService from './pages/Documents';
 import ProtectedRoute from './pages/ProtectedRoute'; // Import ProtectedRoute
+import UserList from './pages/UserList';
 
 const getDecodedToken = () => {
   const token = localStorage.getItem('token');
@@ -46,8 +48,15 @@ function App() {
             </Route>
             <Route element={<ProtectedRoute role="superadmin" />}>
               <Route path="/superadmin" element={<SuperAdmin />} />
+              <Route path="/user-list" element={<UserList />} />
+
             </Route>
+            <Route path="/documents" element={<DocumentService />} />
+            
+            <Route path="/user-list" element={<UserList />} /> 
+
             <Route path="*" element={<Error />} />
+
           </Routes>
         </Container>
       </Router>

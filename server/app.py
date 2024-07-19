@@ -11,8 +11,6 @@ from bson.objectid import ObjectId
 load_dotenv()
 
 app = Flask(__name__, static_folder='build', static_url_path='')
-# cors_origins = os.getenv('CORS_ORIGINS')
-# CORS(app, origins="*")
 cors_origins = os.getenv('CORS_ORIGINS', '').split(',')
 CORS(app, origins=cors_origins)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -31,11 +29,11 @@ def verify_token(func):
         print(auth_cookie)
         if auth_cookie:
             token_parts = auth_cookie.split("%20")
-            if len(token_parts) == 2 and token_parts[0] == 'Bearer':  # Ensure correct format 'Bearer <token>'
-                token = token_parts[1]  # Extract token from cookie
+            if len(token_parts) == 2 and token_parts[0] == 'Bearer': 
+                token = token_parts[1]
                 try:
                     decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-                    kwargs['decoded_token'] = decoded_token  # Pass decoded token to the view function
+                    kwargs['decoded_token'] = decoded_token 
                     print("TOKEN VALIDATED")
                     return func(*args, **kwargs)
                 except jwt.ExpiredSignatureError:
@@ -53,7 +51,6 @@ def login():
     data = request.json
     username = data.get('username') 
     password = data.get('password')
-    
     user = collection.find_one({"username": username, "password": password})
     
     if user:
@@ -65,7 +62,6 @@ def login():
                 'exp': datetime.datetime.now() + datetime.timedelta(hours=1)
             }, app.config['SECRET_KEY'])
 
-            # Print token information
             print(f"Generated token for {username}: {token}")
             return jsonify({'token': token})
         else:
@@ -184,7 +180,7 @@ def user_list(**kwargs):
     decoded_token = kwargs.get('decoded_token')
     if decoded_token and decoded_token.get('role') == 'superadmin':
         if request.method == 'GET':
-            current_user_id = decoded_token.get('user_id')  # Get current user ID from token
+            current_user_id = decoded_token.get('user_id')  
             users = list(collection.find({'_id': {'$ne': ObjectId(current_user_id)}}, {'username': 1, 'active': 1}))
             for user in users:
                 user['_id'] = str(user['_id'])
@@ -206,6 +202,5 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    # app.run(debug=True, host='0.0.0.0')
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 

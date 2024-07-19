@@ -8,7 +8,7 @@ import Admin from './components/admin/Admin';
 import SuperAdmin from './components/superAdmin/SuperAdmin';
 import Error from './pages/Error';
 import DocumentService from './pages/Documents';
-import ProtectedRoute from './pages/ProtectedRoute'; // Import ProtectedRoute
+import ProtectedRoute from './pages/ProtectedRoute'; 
 import UserList from './pages/UserList';
 
 const getDecodedToken = () => {
@@ -24,7 +24,6 @@ const getDecodedToken = () => {
   return null;
 };
 
-// Function to check if user is logged in
 const isLoggedIn = () => {
   const decodedToken = getDecodedToken();
   return decodedToken !== null;

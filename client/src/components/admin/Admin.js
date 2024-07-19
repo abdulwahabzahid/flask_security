@@ -5,7 +5,7 @@ import SimpleSidebar from '../chakra/SimpleSidebar';
 const Admin = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
-    window.location.href = '/'; // Redirect to the login page
+    window.location.href = '/'; 
   };
 
   return (
@@ -14,10 +14,10 @@ const Admin = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        height="calc(100vh - 80px)" // Adjust height as needed
-        mx="auto" // Centers the box horizontally
-        p={6} // Provides padding around the content
-        bg="white" // Sets a white background color
+        height="calc(100vh - 80px)" 
+        mx="auto" 
+        p={6}
+        bg="white" 
       >
         <Box textAlign="center">
           <Heading as="h2" size="xl" mb={4}>

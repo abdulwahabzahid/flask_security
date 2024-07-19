@@ -16,7 +16,6 @@ const getDecodedToken = () => {
   return null;
 };
 
-// Function to check if the user is authenticated and has a specific role
 const isAuthenticated = (role) => {
   const decodedToken = getDecodedToken();
   return decodedToken && decodedToken.role === role;

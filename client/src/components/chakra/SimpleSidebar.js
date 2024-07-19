@@ -49,11 +49,11 @@ const SimpleSidebar = ({ children }) => {
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const token = localStorage.getItem('token');
-  let userRole = ''; // Initialize userRole
+  let userRole = ''; 
 
   if (token) {
     const decodedToken = jwtDecode(token);
-    userRole = decodedToken.role; // Get user role from decoded token
+    userRole = decodedToken.role; 
   }
 
   return (
